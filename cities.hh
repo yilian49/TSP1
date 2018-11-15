@@ -38,4 +38,5 @@ class Cities {
 };
 
 
-  std::istream& operator>> (std::istream& is, Cities& city); 
+std::istream& operator>> (std::istream& is, Cities& city); 
+std::ostream& operator<< (std::ostream& is, Cities& city);
