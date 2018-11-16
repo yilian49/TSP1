@@ -16,6 +16,8 @@ int main()
 
 	std::cout<<cities.total_path_distance(ordering);
 
+	Cities new_cities = cities.reorder(ordering);
+
 	auto fout = std::ofstream("out");
 	fout<<cities;
 

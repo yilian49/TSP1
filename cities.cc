@@ -36,7 +36,7 @@ Cities::total_path_distance(const permutation_t& ordering) const
 	int xi, yi, xj, yj;	// cood of two cities
 	while (i<ordering.size())
 	{
-		xi = city_list[(ordering[i])].first;	//doesn't work!!!!
+		xi = city_list[(ordering[i])].first;	
 		yi = city_list[(ordering[i])].second;
 		xj = city_list[(ordering[i-1])].first;
 		yj = city_list[(ordering[i-1])].second;	
@@ -49,8 +49,16 @@ Cities::total_path_distance(const permutation_t& ordering) const
 			city_list[ordering[0]].second - city_list[ordering[ordering.size()-1]].second);
 	return distance;
 }
-/*
+
 Cities
 Cities::reorder(const permutation_t& ordering) const
 {
-*/	
+	Cities cities_ordered;
+	long unsigned int i = 0;
+
+	while(i < ordering.size()){
+		cities_ordered.city_list.push_back(city_list[ordering[i]]);
+	}	
+
+	return cities_ordered;
+}
