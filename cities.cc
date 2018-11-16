@@ -32,7 +32,7 @@ double
 Cities::total_path_distance(const permutation_t& ordering) const
 {
 	double distance = 0;
-	int i = 1;
+	long unsigned int i = 0;
 	int xi, yi, xj, yj;	// cood of two cities
 	while (i<ordering.size())
 	{
@@ -44,13 +44,13 @@ Cities::total_path_distance(const permutation_t& ordering) const
 		i++;
 	}
 	distance += std::hypot(
-			city_list[(ordering.begin())].first - city_list[(ordering.end())].first,
+			city_list[ordering[0]].first - city_list[ordering[ordering.size()-1]].first,
 			
-			city_list[(ordering.begin())].second - city_list[(ordering.end())].second);
+			city_list[ordering[0]].second - city_list[ordering[ordering.size()-1]].second);
 	return distance;
 }
-
+/*
 Cities
 Cities::reorder(const permutation_t& ordering) const
 {
-	
+*/	
