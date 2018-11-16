@@ -40,3 +40,4 @@ class Cities {
 
 std::istream& operator>> (std::istream& is, Cities& city); 
 std::ostream& operator<< (std::ostream& is, Cities& city);
+Cities::permutation_t random_permutation(unsigned int len);

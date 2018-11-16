@@ -16,8 +16,13 @@ int main()
 
 	std::cout<<cities.total_path_distance(ordering);
 
-	Cities new_cities = cities.reorder(ordering);
+	Cities::permutation_t randomized = random_permutation(5);
 
+	for(auto i: randomized){
+		std::cout << i << "	" << "\n";
+	}
+
+	std::cout << "Reached";
 	auto fout = std::ofstream("out");
 	fout<<cities;
 

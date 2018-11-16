@@ -1,5 +1,9 @@
 #include "cities.hh"
+#include <algorithm>
 #include <cmath>
+#include <random>
+
+///////////////////////////////////////////////////////////////////////////////////////
 
 std::istream& operator>> (std::istream& is, Cities& city)
 {
@@ -13,6 +17,8 @@ std::istream& operator>> (std::istream& is, Cities& city)
 	}
 	return is;
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
 				
 std::ostream& operator<< (std::ostream& os, Cities& city)
 {
@@ -28,6 +34,8 @@ std::ostream& operator<< (std::ostream& os, Cities& city)
 	return os;
 }
 	
+///////////////////////////////////////////////////////////////////////////////////////
+
 double 
 Cities::total_path_distance(const permutation_t& ordering) const
 {
@@ -50,6 +58,8 @@ Cities::total_path_distance(const permutation_t& ordering) const
 	return distance;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////
+
 Cities
 Cities::reorder(const permutation_t& ordering) const
 {
@@ -61,4 +71,25 @@ Cities::reorder(const permutation_t& ordering) const
 	}	
 
 	return cities_ordered;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+Cities::permutation_t
+random_permutation(unsigned int len){
+
+	Cities::permutation_t random_order;
+
+	std::default_random_engine generator;
+	std::uniform_int_distribution<int> distribution(0, len-1);
+
+	while (random_order.size() < len){
+		int rand_gen = distribution(generator);
+
+		if(std::find(random_order.begin(), random_order.end(), rand_gen) == random_order.end()) {
+   			random_order.push_back(rand_gen);
+		} 
+	}
+
+	return random_order;
 }
