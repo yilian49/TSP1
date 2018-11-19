@@ -33,10 +33,16 @@ class Cities {
   // The distance between any two cities is computed as the Euclidean 
   // distance on a plane between their coordinates.
   double total_path_distance(const permutation_t& ordering) const;
-  
+ 
+  // used to add one item to the city list, which is a private member 
   void city_list_add(coord_t coord);
-
+  
+  // returns the length of city list, a private member.
+  // this is a constant function
   int city_list_len() const;
+
+  // returns a copy of city_list
+  // also constant function
   city_list_t get_list() const;  
 
  private:
@@ -46,4 +52,6 @@ class Cities {
 
 std::istream& operator>> (std::istream& is, Cities& city); 
 std::ostream& operator<< (std::ostream& is, Cities& city);
+
+// generates a random permutation by a given length
 Cities::permutation_t random_permutation(unsigned int len);
