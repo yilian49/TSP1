@@ -19,6 +19,8 @@ class Cities {
   // into the current city ordering.
   using permutation_t = std::vector<unsigned int>;
 
+  ~Cities() = default;
+
   // Given a permutation, return a new Cities object where the order of the
   // cities reflects the original order of this class after reordering with
   // the given ordering. So for example, the ordering { 1, 0 } simply swaps
@@ -32,8 +34,12 @@ class Cities {
   // distance on a plane between their coordinates.
   double total_path_distance(const permutation_t& ordering) const;
   
+  void city_list_add(coord_t coord);
 
-// private:
+  int city_list_len() const;
+  city_list_t get_list() const;  
+
+ private:
   city_list_t city_list;
 };
 

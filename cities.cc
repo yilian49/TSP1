@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <cmath>
 #include <random>
+#include <chrono>
 
 ///////////////////////////////////////////////////////////////////////////////////////
 
@@ -13,7 +14,7 @@ std::istream& operator>> (std::istream& is, Cities& city)
 	{
 		is>>y;
 		Cities::coord_t loc = {x,y};
-		city.city_list.push_back(loc);
+		city.city_list_add(loc);
 	}
 	return is;
 }
@@ -24,7 +25,8 @@ std::ostream& operator<< (std::ostream& os, Cities& city)
 {
 	int x;
 	int y;
-	for (auto i:city.city_list)
+	auto city_list_temp = city.get_list();
+	for (auto i:city_list_temp)
 	{
 		x = i.first;
 		y = i.second;
@@ -34,6 +36,14 @@ std::ostream& operator<< (std::ostream& os, Cities& city)
 	return os;
 }
 	
+///////////////////////////////////////////////////////////////////////////////////////
+
+Cities::city_list_t 
+Cities::get_list() const
+{
+	return city_list;
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////
 
 double 
@@ -67,10 +77,18 @@ Cities::reorder(const permutation_t& ordering) const
 	long unsigned int i = 0;
 
 	while(i < ordering.size()){
-		cities_ordered.city_list.push_back(city_list[ordering[i]]);
+		cities_ordered.city_list_add(city_list[ordering[i]]);
+		i++;
 	}	
 
 	return cities_ordered;
+}
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+void Cities::city_list_add(coord_t coord)
+{
+	city_list.push_back(coord);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -80,7 +98,9 @@ random_permutation(unsigned int len){
 
 	Cities::permutation_t random_order;
 
-	std::default_random_engine generator;
+	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+
+	std::default_random_engine generator(seed) ;
 	std::uniform_int_distribution<int> distribution(0, len-1);
 
 	while (random_order.size() < len){
@@ -92,4 +112,12 @@ random_permutation(unsigned int len){
 	}
 
 	return random_order;
+
+}
+
+////////////////////////////////////////////////////////////////////////////////////////
+
+int Cities::city_list_len() const
+{
+	return city_list.size();
 }

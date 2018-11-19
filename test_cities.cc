@@ -16,10 +16,10 @@ int main()
 
 	std::cout<<cities.total_path_distance(ordering);
 
-	Cities::permutation_t randomized = random_permutation(5);
+	Cities::permutation_t randomized = random_permutation(20);
 
 	for(auto i: randomized){
-		std::cout << i << "	" << "\n";
+		std::cout << i << "\t" << "\n";
 	}
 
 	std::cout << "Reached";
